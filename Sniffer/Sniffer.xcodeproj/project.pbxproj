@@ -42,7 +42,7 @@
 		32ACEDA5297CFFF000622948 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDA4297CFFF000622948 /* TopView.swift */; };
 		32ACEDA7297D019100622948 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDA6297D019100622948 /* MainView.swift */; };
 		32ACEDA9297D072100622948 /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDA8297D072100622948 /* data.swift */; };
-		32ACEDAB297D07BC00622948 /* observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDAA297D07BC00622948 /* observer.swift */; };
+		32ACEDAB297D07BC00622948 /* FirebaseObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDAA297D07BC00622948 /* FirebaseObserver.swift */; };
 		32ACEDAE297D12CA00622948 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 32ACEDAD297D12CA00622948 /* SDWebImageSwiftUI */; };
 		32ACEDB0297D344200622948 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDAF297D344200622948 /* Loader.swift */; };
 		32ACEDB2297D347E00622948 /* SwipeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDB1297D347E00622948 /* SwipeDetailsView.swift */; };
@@ -60,7 +60,7 @@
 		32ACEDA4297CFFF000622948 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		32ACEDA6297D019100622948 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		32ACEDA8297D072100622948 /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
-		32ACEDAA297D07BC00622948 /* observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = observer.swift; sourceTree = "<group>"; };
+		32ACEDAA297D07BC00622948 /* FirebaseObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseObserver.swift; sourceTree = "<group>"; };
 		32ACEDAF297D344200622948 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		32ACEDB1297D347E00622948 /* SwipeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeDetailsView.swift; sourceTree = "<group>"; };
 		32ACEDB3297D36AB00622948 /* likedPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = likedPeople.swift; sourceTree = "<group>"; };
@@ -128,7 +128,7 @@
 				32ACEDB5297D375A00622948 /* Details.swift */,
 				32ACED5B297C8D5200622948 /* SnifferApp.swift */,
 				32ACEDA8297D072100622948 /* data.swift */,
-				32ACEDAA297D07BC00622948 /* observer.swift */,
+				32ACEDAA297D07BC00622948 /* FirebaseObserver.swift */,
 				32ACEDAF297D344200622948 /* Loader.swift */,
 				32ACED6B297CE9B600622948 /* GoogleService-Info.plist */,
 				32ACED5F297C8D5600622948 /* Assets.xcassets */,
@@ -264,7 +264,7 @@
 				32ACEDB6297D375A00622948 /* Details.swift in Sources */,
 				32ACED5C297C8D5200622948 /* SnifferApp.swift in Sources */,
 				32ACEDB0297D344200622948 /* Loader.swift in Sources */,
-				32ACEDAB297D07BC00622948 /* observer.swift in Sources */,
+				32ACEDAB297D07BC00622948 /* FirebaseObserver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

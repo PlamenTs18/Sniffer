@@ -14,10 +14,11 @@ import Firebase
 struct DevSwiftUIApp: App {
 
    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
+    @StateObject var obs = FirebaseObserver()
    var body: some Scene {
        WindowGroup {
            ContentView()
+               .environmentObject(obs)
        }
    }
 }

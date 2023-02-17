@@ -10,10 +10,13 @@ import SDWebImageSwiftUI
  
 struct SwipeDetailsView: View {
      
-    var name = ""
-    var breed = ""
-    var image = ""
-    var height : CGFloat = 0
+    var name: String
+    var breed: String
+    var image: String
+    var height: CGFloat
+    
+    @EnvironmentObject var obs: FirebaseObserver
+    
     var body: some View {
         ZStack {
             AnimatedImage(url: URL(string: image)!).resizable().cornerRadius(20).padding(.horizontal, 15)
@@ -24,8 +27,8 @@ struct SwipeDetailsView: View {
                  
                 HStack {
                     VStack(alignment: .leading, content: {
-                        Text(name).fontWeight(.heavy).font(.system(size: 25)).foregroundColor(.white)
-                        Text(breed).foregroundColor(.white)
+                        Text(name).fontWeight(.heavy).font(.system(size: 25)).foregroundColor(.black)
+                        Text(breed).foregroundColor(.black)
                     })
                     Spacer()
                 }
@@ -37,6 +40,7 @@ struct SwipeDetailsView: View {
  
 struct SwipeDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        SwipeDetailsView()
+        SwipeDetailsView(name: "rkfne", breed: "rfef", image: "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg", height: 100)
+        
     }
 }
