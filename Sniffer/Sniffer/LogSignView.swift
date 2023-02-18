@@ -11,6 +11,8 @@ import Firebase
 struct LogSignView: View {
     
     @State var isLoginMode = false
+    @State var email = ""
+    @State var password = ""
     
     var body: some View {
         NavigationView{
@@ -23,6 +25,34 @@ struct LogSignView: View {
                             .tag(false)
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    
+                    if !isLoginMode{
+                        Button{
+                            
+                        } label: {
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 60))
+                                .padding()
+                        }
+                    }
+                    
+                    Group{
+                        TextField("Email", text: $email)
+                            .keyboardType(.emailAddress)
+                            .autocapitalization(.none)
+                        SecureField("Password", text: $password)
+                    }
+                    .padding(15)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    
+                    Button{
+                        
+                    } label: {
+                        Image(systemName: "person.fill")
+                            .font(.system(size: 60))
+                            .padding()
+                    }
                 }
                 .padding()
             }

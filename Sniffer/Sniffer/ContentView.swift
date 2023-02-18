@@ -13,6 +13,7 @@ struct ContentView: View {
     
     @EnvironmentObject var obs: FirebaseObserver
     @State private var showLiked = false
+    @State private var showLogIn = false
     @State private var currentUser: user1?
     
     var body: some View {
@@ -22,7 +23,7 @@ struct ContentView: View {
                 Loader()
             }
             VStack {
-                TopView(show: $showLiked)
+                TopView(show: $showLiked, show2: $showLogIn)
                 MainView(currentUser: $currentUser)
             }
         }
@@ -40,6 +41,9 @@ struct ContentView: View {
         })
         .sheet(isPresented: $showLiked) {
             LikedPeople()
+        }
+        .sheet(isPresented: $showLogIn) {
+            LogSignView()
         }
     }
 }

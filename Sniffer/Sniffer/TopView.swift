@@ -10,11 +10,12 @@ import SwiftUI
 struct TopView: View {
     
     @Binding var show: Bool
+    @Binding var show2: Bool
     
     var body: some View {
         HStack(alignment: .top) {
             Button(action: {
-                //TODO: Profile page
+                self.show2.toggle()
             }) {
                 Image("prof").resizable().frame(width: 35, height: 35)
             }.cornerRadius(20)
