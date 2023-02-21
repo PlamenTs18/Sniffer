@@ -11,29 +11,31 @@ import SDWebImageSwiftUI
 struct MainView: View {
     
     @EnvironmentObject var obs: FirebaseObserver
-    @Binding var currentUser: user1?
+    @Binding var currentUser: user1
+    @State var refresh: Bool = false
+    
+    func refr(){
+        refresh.toggle()
+    }
     
     var body : some View {
         VStack {
             ZStack {
-                if let currentUser = currentUser {
-                    SwipeDetailsView(name: currentUser.name, breed: currentUser.breed, image: currentUser.image, height: 100)
-                } else {
-                    EmptyView()
+                    SwipeDetailsView(name: currentUser.name, breed: currentUser.breed, image: currentUser.image, height: 500)
                 }
-                    
-                
-            }
             HStack{
                 
                 Spacer()
                 
                 Button(action: {
-                    if self.obs.last == -1{
-                        self.obs.updateDB(id: self.obs.users[self.obs.users.count - 1], status: "dislike")
-                    }
-                    else{
-                        self.obs.updateDB(id: self.obs.users[self.obs.last], status: "dislike")
+                    currentUser.status = "dislike"
+                    self.obs.updateDB(id: currentUser, status: currentUser.status) {
+                        guard let nextUser = self.obs.users.first(where: { user in
+                            user.status == ""
+                        })else {return}
+                        
+                        self.currentUser = nextUser
+                        refr()
                     }
                 }) {
                     Image(systemName: "xmark.circle").resizable().frame(width: 30, height: 30).padding()
@@ -45,11 +47,14 @@ struct MainView: View {
                 Spacer()
                 
                 Button(action: {
-                    if self.obs.last == -1{
-                        self.obs.updateDB(id: self.obs.users[self.obs.users.count - 1], status: "liked")
-                    }
-                    else{
-                        self.obs.updateDB(id: self.obs.users[self.obs.last], status: "liked")
+                    currentUser.status = "liked"
+                    self.obs.updateDB(id: currentUser, status: currentUser.status){
+                        guard let nextUser = self.obs.users.first(where: { user in
+                            user.status == ""
+                        })else {return}
+                        
+                        self.currentUser = nextUser
+                        refr()
                     }
                 }) {
                     Image(systemName: "heart").resizable().frame(width: 35, height: 35).padding()
@@ -67,6 +72,6 @@ struct MainView: View {
 
 //struct MainView_Previews: PreviewProvider {
 //    static var previews: some View {
-//       MainView()
+//        MainView()
 //    }
 //}

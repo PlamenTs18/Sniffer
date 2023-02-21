@@ -54,10 +54,10 @@ class FirebaseObserver : ObservableObject{
   }
  
    
-  func updateDB(id : user1,status : String){
+    func updateDB(id : user1,status : String, completion: @escaping () -> Void){
        
       let db = Firestore.firestore()
-       
+        
       db.collection("users").document(id.id).updateData(["status":status]) { (err) in
            
           if err != nil{
@@ -68,6 +68,7 @@ class FirebaseObserver : ObservableObject{
            
           for i in 0..<self.users.count{
               if self.users[i].id == id.id{
+                  self.users[i].status = status
                   if status == "liked"{
                       self.users[i].swipe = 500
                   }else if status == "dislike"{
@@ -86,6 +87,6 @@ class FirebaseObserver : ObservableObject{
                   }
               }
           }
-           
       }
+    completion()
   }}

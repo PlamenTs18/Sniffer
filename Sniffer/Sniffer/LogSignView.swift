@@ -45,14 +45,6 @@ struct LogSignView: View {
                     .padding(15)
                     .background(Color.white)
                     .cornerRadius(10)
-                    
-                    Button{
-                        
-                    } label: {
-                        Image(systemName: "person.fill")
-                            .font(.system(size: 60))
-                            .padding()
-                    }
                 }
                 .padding()
             }

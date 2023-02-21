@@ -14,7 +14,13 @@ struct ContentView: View {
     @EnvironmentObject var obs: FirebaseObserver
     @State private var showLiked = false
     @State private var showLogIn = false
-    @State private var currentUser: user1?
+    @State var currentUser: user1
+    
+    init(){
+        currentUser = user1(id: "ifhio", name: "jrgj", image: "https://www.google.com/search?q=ichigo&rlz=1C5CHFA_enBG1035BG1035&sxsrf=AJOqlzUs_iTHNoYdXSQHJbj295SXuP-zWg:1677012067952&source=lnms&tbm=isch&sa=X&ved=2ahUKEwieoeDkvKf9AhW7R_EDHQbdBzQQ_AUoAXoECAEQAw&biw=1200&bih=580&dpr=2#imgrc=wFOVaaqCssZMfM", breed: "", swipe: 2, degree: 2, status: "")
+    }
+    
+    
     
     var body: some View {
         ZStack {
@@ -28,7 +34,6 @@ struct ContentView: View {
             }
         }
         .onReceive(obs.$users ,perform: { users in
-            print(users)
             guard users.isEmpty == false else {
                 return
             }
