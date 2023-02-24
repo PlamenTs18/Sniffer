@@ -45,6 +45,22 @@ struct LogSignView: View {
                     .padding(15)
                     .background(Color.white)
                     .cornerRadius(10)
+                    
+                    Button{
+                        
+                    }label:{
+                        HStack{
+                            Spacer()
+                            Text(isLoginMode ? "Log In" : "Create Account")
+                                .foregroundColor(.black)
+                                .padding(.vertical, 10)
+                                .font(.system(size: 15, weight: .semibold))
+                            Spacer()
+                        }.background(Color.gray)
+                    }.cornerRadius(10)
+                    
+                    Text(self.loginStatusMessage)
+                    
                 }
                 .padding()
             }
@@ -52,6 +68,39 @@ struct LogSignView: View {
             .background(Color(.sRGB, red: 0.7, green: 0.7, blue: 0.6).edgesIgnoringSafeArea(.all))
         }
     }
+    
+    private func handleAction(){
+        if isLoginMode{
+            loginUser()
+        }else{
+            createAcc()
+        }
+    }
+    
+    private func loginUser(){
+        Auth.auth().signIn(withEmail: email, password: password){ result, err in
+            if let err = err {
+                print("Failed", err)
+                self.loginStatusMessage = "Failed Login: \(err)"
+                return
+            }
+            print("Success")
+        }
+    }
+    
+    @State var loginStatusMessage = ""
+    
+    private func createAcc(){
+        Auth.auth().createUser(withEmail: email, password: password){ result, err in
+            if let err = err {
+                print("Failed", err)
+                self.loginStatusMessage = "Failed to create: \(err)"
+                return
+            }
+            print("Success")
+        }
+    }
+    
 }
 
 struct LogSignView_Previews: PreviewProvider {

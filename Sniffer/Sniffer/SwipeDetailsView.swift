@@ -18,24 +18,15 @@ struct SwipeDetailsView: View {
     @EnvironmentObject var obs: FirebaseObserver
     
     var body: some View {
-        ZStack {
-            AnimatedImage(url: URL(string: image)!).resizable().cornerRadius(20).padding(.horizontal, 15)
-             
-            VStack {
-                 
-                Spacer()
-                 
-                HStack {
-                    VStack(alignment: .leading, content: {
+        VStack {
+            AnimatedImage(url: URL(string: image)!).resizable().cornerRadius(20).padding(.horizontal, 15).frame(height: height)
+                    VStack(alignment: .center, content: {
                         Text(name).fontWeight(.heavy).font(.system(size: 25)).foregroundColor(.black)
                         Text(breed).foregroundColor(.black)
                     })
                     Spacer()
                 }
-            }.padding([.bottom, .leading], 35)
-             
-        }.frame(height:height)
-    }
+            }
 }
  
 struct SwipeDetailsView_Previews: PreviewProvider {

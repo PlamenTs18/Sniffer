@@ -23,14 +23,21 @@ struct ContentView: View {
     
     
     var body: some View {
+
         ZStack {
             Color(.sRGB, red: 0.7, green: 0.7, blue: 0.6).edgesIgnoringSafeArea(.all)
             if obs.users.isEmpty {
                 Loader()
             }
             VStack {
+                
                 TopView(show: $showLiked, show2: $showLogIn)
+                
+                Spacer()
+                
                 MainView(currentUser: $currentUser)
+                
+                Spacer()
             }
         }
         .onReceive(obs.$users ,perform: { users in

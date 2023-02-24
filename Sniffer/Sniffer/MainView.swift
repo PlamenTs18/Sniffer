@@ -23,6 +23,9 @@ struct MainView: View {
             ZStack {
                     SwipeDetailsView(name: currentUser.name, breed: currentUser.breed, image: currentUser.image, height: 500)
                 }
+            
+            Spacer()
+            
             HStack{
                 
                 Spacer()
