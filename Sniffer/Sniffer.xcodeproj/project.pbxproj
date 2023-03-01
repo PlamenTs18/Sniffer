@@ -49,6 +49,7 @@
 		32ACEDB4297D36AB00622948 /* likedPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDB3297D36AB00622948 /* likedPeople.swift */; };
 		32ACEDB6297D375A00622948 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDB5297D375A00622948 /* Details.swift */; };
 		32B5A438299F1EBA0076788C /* LogSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B5A437299F1EBA0076788C /* LogSignView.swift */; };
+		32B5A43C29AFBBBA0076788C /* ManageProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B5A43B29AFBBBA0076788C /* ManageProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		32ACEDB3297D36AB00622948 /* likedPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = likedPeople.swift; sourceTree = "<group>"; };
 		32ACEDB5297D375A00622948 /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
 		32B5A437299F1EBA0076788C /* LogSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogSignView.swift; sourceTree = "<group>"; };
+		32B5A43B29AFBBBA0076788C /* ManageProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				32ACED5F297C8D5600622948 /* Assets.xcassets */,
 				32ACED61297C8D5600622948 /* Preview Content */,
 				32ACED5D297C8D5200622948 /* ContentView.swift */,
+				32B5A43B29AFBBBA0076788C /* ManageProfileView.swift */,
 				32ACEDA4297CFFF000622948 /* TopView.swift */,
 				32ACEDA6297D019100622948 /* MainView.swift */,
 				32ACEDB1297D347E00622948 /* SwipeDetailsView.swift */,
@@ -269,6 +272,7 @@
 				32ACEDB0297D344200622948 /* Loader.swift in Sources */,
 				32ACEDAB297D07BC00622948 /* FirebaseObserver.swift in Sources */,
 				32B5A438299F1EBA0076788C /* LogSignView.swift in Sources */,
+				32B5A43C29AFBBBA0076788C /* ManageProfileView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

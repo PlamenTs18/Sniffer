@@ -9,16 +9,26 @@ import SwiftUI
 import Firebase
 
 struct LogSignView: View {
+    @Binding var showLogIn: Bool
     
     @State var isLoginMode = false
     @State var email = ""
     @State var password = ""
+    @State var refresh: Bool = false
+    @State var view = ""
+    
+    func refr(){
+        refresh.toggle()
+    }
     
     var body: some View {
-        NavigationView{
-            ScrollView{
-                VStack(spacing: 15){
-                    Picker(selection: $isLoginMode, label: Text("Picker")){
+        if view == "main"{
+            ContentView()
+        }
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 15) {
+                    Picker(selection: $isLoginMode, label: Text("Picker")) {
                         Text("Login")
                             .tag(true)
                         Text("Create Account")
@@ -47,7 +57,7 @@ struct LogSignView: View {
                     .cornerRadius(10)
                     
                     Button{
-                        
+                        handleAction()
                     }label:{
                         HStack{
                             Spacer()
@@ -70,20 +80,25 @@ struct LogSignView: View {
     }
     
     private func handleAction(){
-        if isLoginMode{
+        if isLoginMode {
             loginUser()
-        }else{
+            refr()
+        } else {
             createAcc()
+            refr()
         }
     }
     
     private func loginUser(){
+        // TODO: Auth.auth().currentUser <- use this user to check if already logged in + this logic should be in its own file
         Auth.auth().signIn(withEmail: email, password: password){ result, err in
             if let err = err {
                 print("Failed", err)
                 self.loginStatusMessage = "Failed Login: \(err)"
                 return
             }
+            
+            showLogIn = false
             print("Success")
         }
     }
@@ -97,6 +112,7 @@ struct LogSignView: View {
                 self.loginStatusMessage = "Failed to create: \(err)"
                 return
             }
+            showLogIn = false
             print("Success")
         }
     }
@@ -105,6 +121,6 @@ struct LogSignView: View {
 
 struct LogSignView_Previews: PreviewProvider {
     static var previews: some View {
-        LogSignView()
+        LogSignView(showLogIn: .constant(true))
     }
 }
