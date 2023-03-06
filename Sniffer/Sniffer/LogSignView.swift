@@ -9,13 +9,14 @@ import SwiftUI
 import Firebase
 
 struct LogSignView: View {
-    @Binding var showLogIn: Bool
     
+    @EnvironmentObject var obs: FirebaseObserver
     @State var isLoginMode = false
     @State var email = ""
     @State var password = ""
     @State var refresh: Bool = false
     @State var view = ""
+    @State var loginStatusMessage: String?
     
     func refr(){
         refresh.toggle()
@@ -69,7 +70,7 @@ struct LogSignView: View {
                         }.background(Color.gray)
                     }.cornerRadius(10)
                     
-                    Text(self.loginStatusMessage)
+                    Text(self.loginStatusMessage ?? "")
                     
                 }
                 .padding()
@@ -77,50 +78,24 @@ struct LogSignView: View {
             .navigationTitle(isLoginMode ? "Log In": "Create Account")
             .background(Color(.sRGB, red: 0.7, green: 0.7, blue: 0.6).edgesIgnoringSafeArea(.all))
         }
+        .onReceive(obs.$loginStatusMessage) { loginStatusMessage in
+            self.loginStatusMessage = loginStatusMessage
+        }
     }
     
     private func handleAction(){
         if isLoginMode {
-            loginUser()
+            obs.loginUser(email: email, password: password)
             refr()
         } else {
-            createAcc()
+            obs.createAcc(email: email, password: password)
             refr()
         }
     }
-    
-    private func loginUser(){
-        // TODO: Auth.auth().currentUser <- use this user to check if already logged in + this logic should be in its own file
-        Auth.auth().signIn(withEmail: email, password: password){ result, err in
-            if let err = err {
-                print("Failed", err)
-                self.loginStatusMessage = "Failed Login: \(err)"
-                return
-            }
-            
-            showLogIn = false
-            print("Success")
-        }
-    }
-    
-    @State var loginStatusMessage = ""
-    
-    private func createAcc(){
-        Auth.auth().createUser(withEmail: email, password: password){ result, err in
-            if let err = err {
-                print("Failed", err)
-                self.loginStatusMessage = "Failed to create: \(err)"
-                return
-            }
-            showLogIn = false
-            print("Success")
-        }
-    }
-    
 }
 
 struct LogSignView_Previews: PreviewProvider {
     static var previews: some View {
-        LogSignView(showLogIn: .constant(true))
+        LogSignView()
     }
 }

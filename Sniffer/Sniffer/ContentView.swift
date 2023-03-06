@@ -15,36 +15,23 @@ struct ContentView: View {
     @State private var showLiked = false
     @State private var showManage = false
     @State var refresh: Bool = false
-
-    @State private var showLogIn = false {
-        didSet {
-            // TODO: Need to remove this and use FirebaseObserver'property userLoggedIn (@Pubished)
-            if showLogIn == false {
-                obs.getUsers()
-            }
-        }
-    }
-    
     @State var currentUser: user1?
     @State var currentProfile: user1?
-    @State var userUID = Auth.auth().currentUser?.uid
     
     func refr() {
         refresh.toggle()
     }
     
-    init() {}
-    
-    
+    init() {
+    }
     
     var body: some View {
-        
         ZStack {
             Color(.sRGB, red: 0.7, green: 0.7, blue: 0.6).edgesIgnoringSafeArea(.all)
             if obs.users.isEmpty {
                 Loader()
             }
-            if(showLogIn == false){
+            if(obs.isLoggedIn) {
             VStack {
                 
                 TopView(show: $showLiked, show2: $showManage)
@@ -56,12 +43,17 @@ struct ContentView: View {
                 Spacer()
             }
             } else {
-                LogSignView(showLogIn: $showLogIn)
+                LogSignView()
                 //refr()
             }
         }
         .onAppear(perform: {
-            showLogIn = Auth.auth().currentUser == nil
+            obs.isLoggedIn = Auth.auth().currentUser != nil
+        })
+        .onReceive(obs.$isLoggedIn, perform: { isLoggedIn in
+            if isLoggedIn {
+                obs.getUsers()
+            }
         })
         .onReceive(obs.$users ,perform: { users in
             guard users.isEmpty == false else {
@@ -69,7 +61,7 @@ struct ContentView: View {
             }
             
             guard let currentProfile = users.first(where: { user in
-                user.owner == userUID
+                user.owner == obs.authUID
             }) else {
                 return
             }
@@ -92,7 +84,7 @@ struct ContentView: View {
             LikedPeople(currentProfile: $currentProfile)
         }
         .sheet(isPresented: $showManage) {
-            ManageProfileView(showLogIn: $showLogIn)
+            ManageProfileView()
         }
     }
 }

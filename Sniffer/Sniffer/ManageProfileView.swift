@@ -10,22 +10,15 @@ import Firebase
 
 struct ManageProfileView: View {
     
-    @Binding var showLogIn: Bool
-    
-    private func LogOut(){
-        do {
-                    try Auth.auth().signOut()
-                } catch let signOutError as NSError {
-                    print("Error signing out: \(signOutError)")
-                }
-    }
+    @EnvironmentObject var obs: FirebaseObserver
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         
         
         Button{
-            LogOut()
-            showLogIn = true
+            obs.logOut()
+            presentationMode.wrappedValue.dismiss()
         }label:{
             HStack{
                 Spacer()

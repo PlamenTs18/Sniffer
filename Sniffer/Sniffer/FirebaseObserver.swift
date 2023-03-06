@@ -13,15 +13,57 @@ import Firebase
 class FirebaseObserver: ObservableObject {
     
     let db = Firestore.firestore()
+    let auth = Auth.auth()
     // @Published userLoggedIn: Bool
     @Published var users = [user1]()
     @Published var last = -1
+    @Published var isLoggedIn = false
+    @Published var loginStatusMessage: String?
     
     // TODO: Add login logic here
     // func login
     // func createUser (email, pass, ....)
     // func logout
     
+    var authUID: String? {
+        return auth.currentUser?.uid
+    }
+    
+    
+    func loginUser(email: String, password: String) {
+        auth.signIn(withEmail: email, password: password){ result, err in
+            if let err = err {
+                print("Failed", err)
+                self.loginStatusMessage = "Failed Login: \(err)"
+                return
+            }
+            
+            self.isLoggedIn = true
+            print("Success")
+        }
+    }
+    
+    func createAcc(email: String, password: String){
+        Auth.auth().createUser(withEmail: email, password: password) { result, err in
+            if let err = err {
+                print("Failed", err)
+                self.loginStatusMessage = "Failed to create: \(err)"
+                return
+            }
+            self.isLoggedIn = true
+            print("Success")
+        }
+    }
+    
+    func logOut(){
+        do {
+            // TODO: Move to firebase observer
+            try auth.signOut()
+            self.isLoggedIn = false
+        } catch let signOutError as NSError {
+            print("Error signing out: \(signOutError)")
+        }
+    }
     
     
     func getUsers() {
