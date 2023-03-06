@@ -32,8 +32,8 @@ class FirebaseObserver: ObservableObject {
                 return
             }
             
-            for i in snap!.documents{
-                
+            var usersArray = [user1]()
+            for i in snap!.documents {
                 let name = i.get("name") as! String
                 let breed = i.get("breed") as! String
                 let image = i.get("image") as! String
@@ -41,10 +41,11 @@ class FirebaseObserver: ObservableObject {
                 let owner = i.get("owner") as! String
                 let liked = i.get("liked") as! [String]
                 let disliked = i.get("disliked") as! [String]
-
                 
-                self.users.append(user1(id: id, name: name, image: image, breed: breed, swipe: 0, degree: 0, owner: owner, disliked: disliked, liked: liked))
+                usersArray.append(user1(id: id, name: name, image: image, breed: breed, swipe: 0, degree: 0, owner: owner, disliked: disliked, liked: liked))
             }
+            
+            self.users = usersArray
         }
     }
     
@@ -62,37 +63,15 @@ class FirebaseObserver: ObservableObject {
     }
     
     
-    func updateDB(id : user1, owner : String, completion: @escaping () -> Void){
-        
-        db.collection("users").document(id.id).updateData(["owner":owner]) { (err) in
-            
-            if err != nil{
-                print(err!.localizedDescription)
-                return
-            }
-            print("success \(id.id)")
-            
-            for i in 0..<self.users.count{
-                if self.users[i].id == id.id{
-                    self.users[i].owner = owner
-                    if owner == "liked"{
-                        self.users[i].swipe = 500
-                    }else if owner == "dislike"{
-                        self.users[i].swipe = -500
-                    }else{
-                        self.users[i].swipe = 0
-                    }
-                }
-            }
-            
-            if owner == "liked" {
-                self.db.collection("liked").document(id.id).setData(["name":id.name,"breed":id.breed,"image":id.image]) { (err) in
-                    if err != nil{
-                        print((err?.localizedDescription)!)
-                        return
-                    }
-                }
-            }
+    func updateDB(currentProfile : user1, likedUser : String, action: String){
+        let documentReference = db.collection("users").document(currentProfile.id)
+        if(action == "like"){
+            documentReference.updateData(["liked": FieldValue.arrayUnion([likedUser])
+        ])
+        }else{
+            documentReference.updateData(["disliked": FieldValue.arrayUnion([likedUser])
+        ])
         }
-        completion()
+        
+        getUsers()
     }}

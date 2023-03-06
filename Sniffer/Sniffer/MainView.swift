@@ -13,35 +13,23 @@ import Firebase
 struct MainView: View {
     
     @EnvironmentObject var obs: FirebaseObserver
-    @Binding var currentUser: user1
-    @Binding var currentProfile: user1
-    @Binding var userUID: String?
+    @Binding var currentUser: user1?
+    @Binding var currentProfile: user1?
     @State var refresh: Bool = false
     
-    
-    func nextCurr(){
-        
-        for nextCurr in obs.users {
-            if !currentProfile.liked.contains(nextCurr.id) && !currentProfile.disliked.contains(nextCurr.id) {
-                currentUser = nextCurr
-            }
-                break
-            }
-    }
-
-        
     func refr(){
         refresh.toggle()
     }
     
-    
     var body : some View {
         VStack {
             ZStack {
-                    SwipeDetailsView(name: currentUser.name, breed: currentUser.breed, image: currentUser.image, height: 500)
+                if let currentUser = currentUser {
+                    SwipeDetailsView(currentUser: currentUser, height: 500)
+                } else {
+                    EmptyView()
                 }
-            .onAppear{
-                nextCurr()
+                
             }
             
             Spacer()
@@ -51,9 +39,11 @@ struct MainView: View {
                 Spacer()
                 
                 Button(action: {
-                    
-                        nextCurr()
-                        refr()
+                    if let currentUser = currentUser {
+                        currentProfile?.disliked.append(currentUser.id)
+                        obs.updateDB(currentProfile:currentProfile!, likedUser: currentUser.id, action: "dislike")
+                    }
+                    refr()
                 }) {
                     Image(systemName: "xmark.circle").resizable().frame(width: 30, height: 30).padding()
                 }.foregroundColor(.pink)
@@ -64,10 +54,11 @@ struct MainView: View {
                 Spacer()
                 
                 Button(action: {
-                    
-                        nextCurr()
-
-                        refr()
+                    if let currentUser = currentUser {
+                        currentProfile?.liked.append(currentUser.id)
+                        obs.updateDB(currentProfile:currentProfile!, likedUser: currentUser.id, action: "like")
+                    }
+                    refr()
                 }) {
                     Image(systemName: "heart").resizable().frame(width: 35, height: 35).padding()
                 }.foregroundColor(.blue)

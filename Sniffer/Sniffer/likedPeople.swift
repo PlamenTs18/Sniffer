@@ -8,65 +8,51 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import Firebase
- 
+
+
 struct LikedPeople: View {
-   
-  @ObservedObject var datas = observer1()
-  var body: some View {
-       
-      VStack{
-          if datas.data.isEmpty{
-              Text("No Liked People")
-          }
-          else{
-              NavigationView {
-                  List(datas.data){i in
-                      NavigationLink(destination : Details(userItem: i)) {
-                          cards(name: i.name, image: i.image)
-                      }
-                  }.navigationBarTitle("Like Users")
-              }
-          }
-      }
-  }
+    @EnvironmentObject var obs: FirebaseObserver
+    @Binding var currentProfile: user1?
+    
+    var likedPeople: [user2] {
+        var people = [user2]()
+        for i in obs.users {
+            if(currentProfile!.liked.contains(i.id)){
+                people.append(user2(id: i.id, name: i.name, breed: i.breed, image: i.image))
+            }
+        }
+        return people
+    }
+    
+    var body: some View {
+        VStack{
+            if currentProfile!.liked.isEmpty{
+                Text("No Liked People")
+            }
+            else{
+                NavigationView {
+                    List {
+                        ForEach(likedPeople, id: \.id) { i in
+                            NavigationLink(destination : Details(userItem: i)) {cards(name: i.name, image: i.image)
+                            }
+                        }
+                    }.navigationBarTitle("Like Users")
+                }
+            }
+        }
+    }
 }
- 
+
 struct cards : View {
-   
-  var name = ""
-  var image = ""
-  var body : some View{
-       
-      HStack{
-          AnimatedImage(url: URL(string: image)!).resizable().frame(width: 65, height: 65).clipShape(Circle())
-          Text(name).fontWeight(.heavy)
-      }
-  }
+    
+    var name = ""
+    var image = ""
+    var body : some View{
+        
+        HStack{
+            AnimatedImage(url: URL(string: image)!).resizable().frame(width: 65, height: 65).clipShape(Circle())
+            Text(name).fontWeight(.heavy)
+        }
+    }
 }
- 
-class observer1 : ObservableObject{
-   
-  @Published var data = [user2]()
-   
-  init() {
-       
-      let db = Firestore.firestore()
-      db.collection("liked").getDocuments { (snap, err) in
-           
-          if err != nil{
-               
-              print((err?.localizedDescription)!)
-              return
-          }
-           
-          for i in snap!.documents{
-               
-              let name = i.get("name") as! String
-              let breed = i.get("breed") as! String
-              let image = i.get("image") as! String
-               
-              self.data.append(user2(id: UUID().uuidString, name: name, breed: breed, image: image))
-          }
-      }
-  }
-}
+
