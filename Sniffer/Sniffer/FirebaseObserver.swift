@@ -22,6 +22,8 @@ class FirebaseObserver: ObservableObject {
     // func createUser (email, pass, ....)
     // func logout
     
+    
+    
     func getUsers() {
         db.collection("users").getDocuments { (snap, err) in
             if err != nil{
@@ -37,8 +39,11 @@ class FirebaseObserver: ObservableObject {
                 let image = i.get("image") as! String
                 let id = i.documentID
                 let owner = i.get("owner") as! String
+                let liked = i.get("liked") as! [String]
+                let disliked = i.get("disliked") as! [String]
+
                 
-                self.users.append(user1(id: id, name: name, image: image, breed: breed, swipe: 0, degree: 0, owner: owner))
+                self.users.append(user1(id: id, name: name, image: image, breed: breed, swipe: 0, degree: 0, owner: owner, disliked: disliked, liked: liked))
             }
         }
     }

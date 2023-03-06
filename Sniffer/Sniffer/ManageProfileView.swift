@@ -16,6 +16,6 @@ struct ManageProfileView: View {
 
 struct ManageProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ManageProfileView(showManage: .constant(true))
+        ManageProfileView()
     }
 }

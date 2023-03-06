@@ -17,8 +17,8 @@ struct user1: Identifiable {
     var swipe: CGFloat
     var degree: Double
     var owner: String
-    var disliked = [String]()
-    var liked = [String]()
+    var disliked: [String]
+    var liked: [String]
 }
 
 struct user2: Identifiable {

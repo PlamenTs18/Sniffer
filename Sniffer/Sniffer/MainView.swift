@@ -7,22 +7,42 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Firebase
+
 
 struct MainView: View {
     
     @EnvironmentObject var obs: FirebaseObserver
     @Binding var currentUser: user1
+    @Binding var currentProfile: user1
+    @Binding var userUID: String?
     @State var refresh: Bool = false
     
+    
+    func nextCurr(){
+        
+        for nextCurr in obs.users {
+            if !currentProfile.liked.contains(nextCurr.id) && !currentProfile.disliked.contains(nextCurr.id) {
+                currentUser = nextCurr
+            }
+                break
+            }
+    }
+
+        
     func refr(){
         refresh.toggle()
     }
+    
     
     var body : some View {
         VStack {
             ZStack {
                     SwipeDetailsView(name: currentUser.name, breed: currentUser.breed, image: currentUser.image, height: 500)
                 }
+            .onAppear{
+                nextCurr()
+            }
             
             Spacer()
             
@@ -31,15 +51,9 @@ struct MainView: View {
                 Spacer()
                 
                 Button(action: {
-                    currentUser.status = "dislike"
-                    self.obs.updateDB(id: currentUser, status: currentUser.status) {
-                        guard let nextUser = self.obs.users.first(where: { user in
-                            user.status == ""
-                        })else {return}
-                        
-                        self.currentUser = nextUser
+                    
+                        nextCurr()
                         refr()
-                    }
                 }) {
                     Image(systemName: "xmark.circle").resizable().frame(width: 30, height: 30).padding()
                 }.foregroundColor(.pink)
@@ -50,15 +64,10 @@ struct MainView: View {
                 Spacer()
                 
                 Button(action: {
-                    currentUser.status = "liked"
-                    self.obs.updateDB(id: currentUser, status: currentUser.status){
-                        guard let nextUser = self.obs.users.first(where: { user in
-                            user.status == ""
-                        })else {return}
-                        
-                        self.currentUser = nextUser
+                    
+                        nextCurr()
+
                         refr()
-                    }
                 }) {
                     Image(systemName: "heart").resizable().frame(width: 35, height: 35).padding()
                 }.foregroundColor(.blue)

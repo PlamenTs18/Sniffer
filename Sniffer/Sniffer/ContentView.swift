@@ -13,7 +13,7 @@ struct ContentView: View {
     
     @EnvironmentObject var obs: FirebaseObserver
     @State private var showLiked = false
-    @State private var ShowManage = false
+    @State private var showManage = false
     @State private var showLogIn = false {
         didSet {
             // TODO: Need to remove this and use FirebaseObserver'property userLoggedIn (@Pubished)
@@ -24,9 +24,12 @@ struct ContentView: View {
     }
     
     @State var currentUser: user1
+    @State var currentProfile: user1
+    @State var userUID = Auth.auth().currentUser?.uid
     
     init(){
-        currentUser = user1(id: "ifhio", name: "", image: "https://www.google.com/search?q=ichigo&rlz=1C5CHFA_enBG1035BG1035&sxsrf=AJOqlzUs_iTHNoYdXSQHJbj295SXuP-zWg:1677012067952&source=lnms&tbm=isch&sa=X&ved=2ahUKEwieoeDkvKf9AhW7R_EDHQbdBzQQ_AUoAXoECAEQAw&biw=1200&bih=580&dpr=2#imgrc=wFOVaaqCssZMfM", breed: "", swipe: 2, degree: 2, owner: "")
+        currentUser = user1(id: "", name: "", image: "https://www.google.com/search?q=ichigo&rlz=1C5CHFA_enBG1035BG1035&sxsrf=AJOqlzUs_iTHNoYdXSQHJbj295SXuP-zWg:1677012067952&source=lnms&tbm=isch&sa=X&ved=2ahUKEwieoeDkvKf9AhW7R_EDHQbdBzQQ_AUoAXoECAEQAw&biw=1200&bih=580&dpr=2#imgrc=wFOVaaqCssZMfM", breed: "", swipe: 2, degree: 2, owner: "", disliked: [], liked: [])
+        currentProfile = user1(id: "", name: "", image: "", breed: "", swipe: 2, degree: 2, owner: "", disliked: [], liked: [])
     }
     
     var body: some View {
@@ -42,7 +45,7 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                MainView(currentUser: $currentUser)
+                MainView(currentUser: $currentUser, currentProfile: $currentProfile, userUID: $userUID)
                 
                 Spacer()
             }
@@ -54,17 +57,27 @@ struct ContentView: View {
             guard users.isEmpty == false else {
                 return
             }
-            guard let currentUser = users.first(where: { user in
-                user.owner == ""
+            
+            guard let currentProfile = users.first(where: { user in
+                user.owner == userUID
             }) else {
                 return
             }
-            self.currentUser = currentUser
+            self.currentProfile = currentProfile
+            
+            
+//            guard let currentUser = users.first(where: { user in
+//                !currentProfile.liked.contains(user.id) && !currentProfile.disliked.contains(user.id)
+//            }) else {
+//                return
+//            }
+//            self.currentUser = currentUser
+            
         })
         .sheet(isPresented: $showLiked) {
             LikedPeople()
         }
-        .sheet(isPresented: $showLiked) {
+        .sheet(isPresented: $showManage) {
             ManageProfileView()
         }
     }

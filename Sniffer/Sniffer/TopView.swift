@@ -11,7 +11,6 @@ struct TopView: View {
     
     @Binding var show: Bool
     @Binding var show2: Bool
-    @Binding var show3
     
     var body: some View {
         HStack(alignment: .top) {
