@@ -13,6 +13,9 @@ struct LogSignView: View {
     @EnvironmentObject var obs: FirebaseObserver
     @State var isLoginMode = false
     @State var email = ""
+    @State var Uname = ""
+    @State var Ubreed = ""
+    @State var Uimage = ""
     @State var password = ""
     @State var refresh: Bool = false
     @State var view = ""
@@ -52,6 +55,11 @@ struct LogSignView: View {
                             .keyboardType(.emailAddress)
                             .autocapitalization(.none)
                         SecureField("Password", text: $password)
+                        if(isLoginMode == false){
+                            TextField("Name", text: $Uname)
+                            TextField("Breed", text: $Ubreed)
+                            TextField("Image", text: $Uimage)
+                        }
                     }
                     .padding(15)
                     .background(Color.white)
@@ -81,21 +89,20 @@ struct LogSignView: View {
         .onReceive(obs.$loginStatusMessage) { loginStatusMessage in
             self.loginStatusMessage = loginStatusMessage
         }
+        
     }
     
     private func handleAction(){
         if isLoginMode {
             obs.loginUser(email: email, password: password)
+            obs.completeLogSign()
             refr()
         } else {
             obs.createAcc(email: email, password: password)
+            obs.addInfo(email: email, name: Uname, breed: Ubreed, image: Uimage, owner: obs.authUID ?? "err", password: password)
+            print("slojeno")
+            //            obs.completeLogSign()
             refr()
         }
-    }
-}
-
-struct LogSignView_Previews: PreviewProvider {
-    static var previews: some View {
-        LogSignView()
     }
 }

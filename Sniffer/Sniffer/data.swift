@@ -19,11 +19,12 @@ struct user1: Identifiable {
     var owner: String
     var disliked: [String]
     var liked: [String]
+    var email: String
 }
 
 struct user2: Identifiable {
     var id: String
     var name: String
-    var breed: String
+    var email: String
     var image: String
 }

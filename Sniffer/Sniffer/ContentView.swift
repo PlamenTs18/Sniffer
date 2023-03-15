@@ -32,19 +32,18 @@ struct ContentView: View {
                 Loader()
             }
             if(obs.isLoggedIn) {
-            VStack {
-                
-                TopView(show: $showLiked, show2: $showManage)
-                
-                Spacer()
-                
-                MainView(currentUser: $currentUser, currentProfile: $currentProfile)
-                
-                Spacer()
-            }
+                VStack {
+                    
+                    TopView(show: $showLiked, show2: $showManage)
+                    
+                    Spacer()
+                    
+                    MainView(currentUser: $currentUser, currentProfile: $currentProfile)
+                    
+                    Spacer()
+                }
             } else {
                 LogSignView()
-                //refr()
             }
         }
         .onAppear(perform: {
@@ -81,16 +80,10 @@ struct ContentView: View {
             }
         })
         .sheet(isPresented: $showLiked) {
-            LikedPeople(currentProfile: $currentProfile)
+            LikedPeopleView(currentProfile: $currentProfile)
         }
         .sheet(isPresented: $showManage) {
-            ManageProfileView()
+            ManageProfileView(currentProfile: $currentProfile)
         }
     }
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//       // ContentView()
-//    }
-//}

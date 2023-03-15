@@ -33,7 +33,6 @@ struct TopView: View {
             }) {
                 Image(systemName: "message").resizable().frame(width: 35, height: 35)
             }
-            
         }.padding()
     }
 }

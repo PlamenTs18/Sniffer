@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32959E8429C0054F0097B5B3 /* InputInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32959E8329C0054F0097B5B3 /* InputInfoView.swift */; };
 		32ACED5C297C8D5200622948 /* SnifferApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACED5B297C8D5200622948 /* SnifferApp.swift */; };
 		32ACED5E297C8D5200622948 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACED5D297C8D5200622948 /* ContentView.swift */; };
 		32ACED60297C8D5600622948 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32ACED5F297C8D5600622948 /* Assets.xcassets */; };
@@ -46,13 +47,14 @@
 		32ACEDAE297D12CA00622948 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 32ACEDAD297D12CA00622948 /* SDWebImageSwiftUI */; };
 		32ACEDB0297D344200622948 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDAF297D344200622948 /* Loader.swift */; };
 		32ACEDB2297D347E00622948 /* SwipeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDB1297D347E00622948 /* SwipeDetailsView.swift */; };
-		32ACEDB4297D36AB00622948 /* likedPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDB3297D36AB00622948 /* likedPeople.swift */; };
+		32ACEDB4297D36AB00622948 /* LikedPeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDB3297D36AB00622948 /* LikedPeopleView.swift */; };
 		32ACEDB6297D375A00622948 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACEDB5297D375A00622948 /* Details.swift */; };
 		32B5A438299F1EBA0076788C /* LogSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B5A437299F1EBA0076788C /* LogSignView.swift */; };
 		32B5A43C29AFBBBA0076788C /* ManageProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B5A43B29AFBBBA0076788C /* ManageProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		32959E8329C0054F0097B5B3 /* InputInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputInfoView.swift; sourceTree = "<group>"; };
 		32ACED58297C8D5200622948 /* Sniffer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sniffer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32ACED5B297C8D5200622948 /* SnifferApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnifferApp.swift; sourceTree = "<group>"; };
 		32ACED5D297C8D5200622948 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -65,7 +67,7 @@
 		32ACEDAA297D07BC00622948 /* FirebaseObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseObserver.swift; sourceTree = "<group>"; };
 		32ACEDAF297D344200622948 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		32ACEDB1297D347E00622948 /* SwipeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeDetailsView.swift; sourceTree = "<group>"; };
-		32ACEDB3297D36AB00622948 /* likedPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = likedPeople.swift; sourceTree = "<group>"; };
+		32ACEDB3297D36AB00622948 /* LikedPeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedPeopleView.swift; sourceTree = "<group>"; };
 		32ACEDB5297D375A00622948 /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
 		32B5A437299F1EBA0076788C /* LogSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogSignView.swift; sourceTree = "<group>"; };
 		32B5A43B29AFBBBA0076788C /* ManageProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProfileView.swift; sourceTree = "<group>"; };
@@ -129,7 +131,6 @@
 		32ACED5A297C8D5200622948 /* Sniffer */ = {
 			isa = PBXGroup;
 			children = (
-				32ACEDB5297D375A00622948 /* Details.swift */,
 				32ACED5B297C8D5200622948 /* SnifferApp.swift */,
 				32ACEDA8297D072100622948 /* data.swift */,
 				32ACEDAA297D07BC00622948 /* FirebaseObserver.swift */,
@@ -139,11 +140,13 @@
 				32ACED61297C8D5600622948 /* Preview Content */,
 				32ACED5D297C8D5200622948 /* ContentView.swift */,
 				32B5A43B29AFBBBA0076788C /* ManageProfileView.swift */,
+				32959E8329C0054F0097B5B3 /* InputInfoView.swift */,
 				32ACEDA4297CFFF000622948 /* TopView.swift */,
 				32ACEDA6297D019100622948 /* MainView.swift */,
 				32ACEDB1297D347E00622948 /* SwipeDetailsView.swift */,
-				32ACEDB3297D36AB00622948 /* likedPeople.swift */,
+				32ACEDB3297D36AB00622948 /* LikedPeopleView.swift */,
 				32B5A437299F1EBA0076788C /* LogSignView.swift */,
+				32ACEDB5297D375A00622948 /* Details.swift */,
 			);
 			path = Sniffer;
 			sourceTree = "<group>";
@@ -263,7 +266,8 @@
 			files = (
 				32ACED5E297C8D5200622948 /* ContentView.swift in Sources */,
 				32ACEDA7297D019100622948 /* MainView.swift in Sources */,
-				32ACEDB4297D36AB00622948 /* likedPeople.swift in Sources */,
+				32ACEDB4297D36AB00622948 /* LikedPeopleView.swift in Sources */,
+				32959E8429C0054F0097B5B3 /* InputInfoView.swift in Sources */,
 				32ACEDB2297D347E00622948 /* SwipeDetailsView.swift in Sources */,
 				32ACEDA5297CFFF000622948 /* TopView.swift in Sources */,
 				32ACEDA9297D072100622948 /* data.swift in Sources */,
